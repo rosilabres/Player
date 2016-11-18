@@ -130,7 +130,20 @@
         margin-top: 15px;
         font-family: 'Oswald', sans-serif;
         height: 30px;
+        text-align: center;
     }
+
+    button {
+         background: #969696;
+         color: #fff;
+         text-decoration: none;
+         border: none;
+         border-radius: 10px;
+     }
+
+     button:hover {
+         background: #0580ae;
+     }
 
     </style>
 
@@ -160,147 +173,150 @@
                                     <span class="info" id="total">00:00</span>
                                 </div>
                                 <div class="text-center botoes">
-                                    <span><i class="fa fa-stop-circle fa-3x" id="stop" onclick="stop()" aria-hidden="true"> </i></span>
-                                    <span><i class="fa fa-fast-backward fa-3x" id="rew" onclick="skip(-10)" aria-hidden="true"> </i></span>
-                                    <span><i class="fa fa-play-circle fa-3x" id="play" onclick="play()" aria-hidden="true"> </i></span>
-                                    <span><i class="fa fa-pause-circle fa-3x" id="pause" onclick="pause()" aria-hidden="true"> </i></span>
-                                    <span><i class="fa fa-fast-forward fa-3x" id="fastFwd" onclick="skip(10)" aria-hidden="true"></i> </span>
+                                    <button id="stop" onclick="stop()"><span><i class="fa fa-stop-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                                    <button id="rew" onclick="skip(-10)"><span><i class="fa fa-fast-backward fa-3x"  aria-hidden="true"> </i></span></button>
+                                    <button id="play" onclick="play()"><span><i class="fa fa-play-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                                    <button id="pause" onclick="pause()"><span><i class="fa fa-pause-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                                    <button id="fastFwd" onclick="skip(10)"><span><i class="fa fa-fast-forward fa-3x"  aria-hidden="true"></i> </span></button>
 
-                                    </div>
                                 </div>
+                            </div>
 
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p class="th2">Lista</p>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div id="lista">
-                                                <span id="conteudo-lista">
-                                                    <ul class='playlists droppable'>
-                                                        <li class='playlist draggable'>BBKingeEricClaptonn.m4a</li>
-                                                        <li class='playlist draggable'>Cuck Berry.mp3</li>
-                                                        <li class='playlist draggable'>Gato.mp4</li>
-                                                        <li class='playlist draggable'>Ney Matogrosso - Poema.mp3</li>
-                                                        <li class='playlist draggable'>Ney Matogrosso - Sangue Latino.mp3</li>
-                                                    </ul>
-                                                </span>
-                                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="th2">Lista</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div id="lista">
+                                            <span id="conteudo-lista">
+                                                <ul class='playlists droppable'>
+                                                    <li class='playlist draggable'>BBKingeEricClaptonn.m4a</li>
+                                                    <li class='playlist draggable'>Cuck Berry.mp3</li>
+                                                    <li class='playlist draggable'>Gato.mp4</li>
+                                                    <li class='playlist draggable'>Ney Matogrosso - Poema.mp3</li>
+                                                    <li class='playlist draggable'>Ney Matogrosso - Sangue Latino.mp3</li>
+                                                </ul>
+                                            </span>
                                         </div>
                                     </div>
-
                                 </div>
 
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-8">
                                     <p id="titulo"></p>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <script src="https://use.fontawesome.com/588f3d4442.js"></script>
-
-            <script type="text/javascript">
-            var deselecionarItensLista = function() {
-                $('ul li').each(function(index) {
-                    $(this).removeClass("selecionado");
-                });
-            };
-
-            $('.draggable, .droppable').sortable({
-                connectWith: '.playlists'
-            });
-
-            $("#player").droppable({
-                drop: function(ui, event) {
-                    $("#player").html("<video id='video' src='media/" + $(event.draggable).html() + "' poster='media/fundo.png'autoplay></video>");
-                    $("#titulo").html("Executando - " + $(event.draggable).html());
-                    video.onprogress = startOnProgress();
-                }
-            });
-
-            $('ul li').on('click', function() {
-                deselecionarItensLista();
-                $(this).addClass("selecionado");
-            });
-
-            $(document).ready(function() {
-                $("li").dblclick(function() {
-                    $("#player").html("<video id='video'src='media/" +
-                    $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='media/fundo.png' width='100%' autoplay></video>");
-                    $("#titulo").html("Executando - " + $(this).html());
-                    video.onprogress = startOnProgress();
-                });
-            });
-
-            function play() {
-                var video = document.getElementById("video");
-                var button = document.getElementById("play");
-                video.play();
-            }
-
-            function pause() {
-                var video = document.getElementById("video");
-                var button = document.getElementById("pause");
-                video.pause();
-            }
-
-            function stop() {
-                var video = document.getElementById("video");
-                video.currentTime = 0;
-                video.pause();
-
-            }
-
-            function skip(value) {
-                var video = document.getElementById("video");
-                video.currentTime += value;
-            }
-
-            function startOnProgress() {
-                video.addEventListener('canplay', play_evento, false);
-                video.addEventListener('play', play_evento, false);
-                video.addEventListener('timeupdate', atualizar, false);
-
-            };
-
-            function atualizar() {
-                document.getElementById('restante').innerHTML = secToStr(video.currentTime);
-            }
-
-            function play_evento() {
-                document.getElementById('restante').innerHTML = secToStr(video.currentTime);
-                document.getElementById('total').innerHTML = secToStr(video.duration);
-            }
-
-            function secToStr(sec_num) {
-                sec_num = Math.floor(sec_num);
-                var horas = Math.floor(sec_num / 3600);
-                var minutos = Math.floor((sec_num - (horas * 3600)) / 60);
-                var segundos = sec_num - (horas * 3600) - (minutos * 60);
-
-                if (horas < 10) {
-                    horas = '0' + horas;
-                }
-                if (minutos < 10) {
-                    minutos = '0' + minutos;
-                }
-                if (segundos < 10) {
-                    segundos = '0' + segundos;
-                }
-                var tempo = minutos + ':' + segundos;
-                return tempo;
-            }
-
-            </script>
         </div>
-    </body>
-    </html>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/588f3d4442.js"></script>
+
+        <script type="text/javascript">
+        var deselecionarItensLista = function() {
+            $('ul li').each(function(index) {
+                $(this).removeClass("selecionado");
+            });
+        };
+
+        $('.draggable, .droppable').sortable({
+            connectWith: '.playlists'
+        });
+
+        $("#player").droppable({
+            drop: function(ui, event) {
+                $("#player").html("<video id='video' src='media/" + $(event.draggable).html() + "' poster='media/fundo.png'autoplay></video>");
+                $("#titulo").html("Executando - " + $(event.draggable).html());
+                video.onprogress = startOnProgress();
+            }
+        });
+
+        $('ul li').on('click', function() {
+            deselecionarItensLista();
+            $(this).addClass("selecionado");
+        });
+
+        $(document).ready(function() {
+            $("li").dblclick(function() {
+                $("#player").html("<video id='video'src='media/" +
+                $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='media/fundo.png' width='100%' autoplay></video>");
+                $("#titulo").html("Executando - " + $(this).html());
+                video.onprogress = startOnProgress();
+            });
+        });
+
+        function play() {
+            var video = document.getElementById("video");
+            var button = document.getElementById("play");
+            video.play();
+        }
+
+        function pause() {
+            var video = document.getElementById("video");
+            var button = document.getElementById("pause");
+            video.pause();
+        }
+
+        function stop() {
+            var video = document.getElementById("video");
+            video.currentTime = 0;
+            video.pause();
+
+        }
+
+        function skip(value) {
+            var video = document.getElementById("video");
+            video.currentTime += value;
+        }
+
+        function startOnProgress() {
+            video.addEventListener('canplay', play_evento, false);
+            video.addEventListener('play', play_evento, false);
+            video.addEventListener('timeupdate', atualizar, false);
+
+        };
+
+        function atualizar() {
+            document.getElementById('restante').innerHTML = secToStr(video.currentTime);
+        }
+
+        function play_evento() {
+            document.getElementById('restante').innerHTML = secToStr(video.currentTime);
+            document.getElementById('total').innerHTML = secToStr(video.duration);
+        }
+
+        function secToStr(sec_num) {
+            sec_num = Math.floor(sec_num);
+            var horas = Math.floor(sec_num / 3600);
+            var minutos = Math.floor((sec_num - (horas * 3600)) / 60);
+            var segundos = sec_num - (horas * 3600) - (minutos * 60);
+
+            if (horas < 10) {
+                horas = '0' + horas;
+            }
+            if (minutos < 10) {
+                minutos = '0' + minutos;
+            }
+            if (segundos < 10) {
+                segundos = '0' + segundos;
+            }
+            var tempo = minutos + ':' + segundos;
+            return tempo;
+        }
+
+        </script>
+    </div>
+</body>
+</html>
