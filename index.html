@@ -1,322 +1,309 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Media Player</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Shrikhand|Oswald" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>Media Player</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Shrikhand|Oswald" rel="stylesheet">
 
-    <style type="text/css">
-    .wrapper{
-        position: absolute;
-        padding-top:  30px;
-        width: 100%;
-        height: 100%;
-        background: -webkit-linear-gradient(left, #0580ae 0%, #03aeed 51%, #2cb5e8 75%); /* Safari  */
-        background: -o-linear-gradient(right, #0580ae 0%, #03aeed 51%, #2cb5e8 75%); /*Opera*/
-        background: -moz-linear-gradient(right, #0580ae 0%, #03aeed 51%, #2cb5e8 75%); /*Firefox*/
-        background: linear-gradient(to right, #0580ae 0%, #03aeed 51%, #2cb5e8 75%); /* Standard syntax */
-    }
+  <style type="text/css">
 
-    ul {
-        list-style-type: none;
-        padding-left: 0px;
-    }
+  body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0580ae;
+  }
 
-    li:hover {
-        text-decoration: underline;
-        cursor: pointer;
-    }
+  ul {
+    list-style-type: none;
+    padding-left: 0px;
+  }
 
-    botoes:hover {
-        color: white;
-    }
+  li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
+  #mediaplayer {
+    padding: 0px 40px 0px 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    height: 100%;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(left, #ececec 0%, #c1c1c1 51%, #969696 75%); /* Safari  */
+    background: -o-linear-gradient(right, #ececec 0%, #c1c1c1 51%, #969696 75%); /*Opera*/
+    background: -moz-linear-gradient(right, #ececec 0%, #c1c1c1 51%, #969696 75%); /*Firefox*/
+    background: linear-gradient(to right, #ececec 0%, #c1c1c1 51%, #969696 75%); /* Standard syntax */
+  }
 
+  .th1 {
+    display: block;
+    font-size: 36px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: 'Shrikhand', cursive;
+  }
 
-    #mediaplayer{
-        padding: 0px 40px 0px 40px;
-        height: 100%;
-        border-radius: 10px;
-        background: -webkit-linear-gradient(left, #ececec 0%, #c1c1c1 51%, #969696 75%); /* Safari  */
-        background: -o-linear-gradient(right, #ececec 0%, #c1c1c1 51%, #969696 75%); /*Opera*/
-        background: -moz-linear-gradient(right, #ececec 0%, #c1c1c1 51%, #969696 75%); /*Firefox*/
-        background: linear-gradient(to right, #ececec 0%, #c1c1c1 51%, #969696 75%); /* Standard syntax */
-    }
+  .th2 {
+    display: block;
+    font-size: 26px;
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 0px;
+    font-family: 'Oswald', cursive;
+    height: 50px;
 
-    .th1{
-        display: block;
-        font-size: 36px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        font-family: 'Shrikhand', cursive;
-    }
+  }
 
-    .th2 {
-        display: block;
-        font-size: 26px;
-        text-align: center;
-        padding-top: 15px;
-        background-color: white;
-        margin-bottom: 0px;
-        font-family: 'Oswald', cursive;
-        height: 50px;
+  .selecionado {
+    background-color: #2cb5e8;
+  }
 
-    }
+  .contagem {
+    text-align: center;
+    font-family: 'Oswald', cursive;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  }
 
-    .selecionado {
-        background-color: #2cb5e8;
-    }
+  #player {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin: 0px auto;
+  }
 
-    .tempos {
-        text-align: center;
-        font-family: 'Oswald', cursive;
-        margin-bottom: 10px;
-        margin-top: 15px;
-    }
+  #player #msg-fundo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Shrikhand', cursive;
+    text-align: center;
+    font-size: 30px;
+    border-style: solid;
+    border-radius: 5px;
+  }
 
-    #player {
-        position: relative;
-        width: 100%;
-        height: 350px;
-        margin: 0px auto;
-    }
+  #player #video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
-    #player #msg-fundo {
-        height: 100%;
-        min-height: 100%;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        font-family: 'Shrikhand', cursive;
-        text-align: center;
-        font-size: 30px;
-        background-color: white;
-    }
+  #lista {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 0px auto;
+  }
 
-    #player #video {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: #f9f9f9;
-    }
+  #lista #conteudo-lista {
+    padding-bottom: 80px;
+    height: 100%;
+    min-height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-family: 'Oswald', cursive;
+    text-align: center;
+  }
 
-    #lista {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        margin: 0px auto;
-    }
+  #titulo {
+    margin-top: 15px;
+    font-family: 'Oswald', sans-serif;
+    height: 30px;
+    text-align: center;
+  }
 
-    #lista #conteudo-lista {
-        padding-bottom: 80px;
-        height: 100%;
-        min-height: 100%;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        font-family: 'Oswald', cursive;
-        text-align: center;
-        background-color: white;
-    }
+  .lista-radius {
+    border-radius: 15px;
+    background-color: white;
+  }
 
-    #titulo {
-        margin-top: 15px;
-        font-family: 'Oswald', sans-serif;
-        height: 30px;
-        text-align: center;
-    }
+  button {
+    background: #969696;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+  }
 
-    button {
-         background: #969696;
-         color: #fff;
-         text-decoration: none;
-         border: none;
-         border-radius: 10px;
-     }
+  button:hover {
+    background: #0580ae;
+  }
 
-     button:hover {
-         background: #0580ae;
-     }
+  .botoes {
+    text-align: center;
+    margin-bottom: 10px;
+  }
 
-    </style>
+  </style>
 
 </head>
 
 <body>
-    <div class="wrapper">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div id="mediaplayer">
-
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <span class="th1">Media Player</span>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div id="player">
-                                    <span id="msg-fundo">Arraste o arquivo ou duplo clique para executar.</span>
-                                </div>
-                                <div class="tempos">
-                                    <span class="info" id="restante">00:00</span> /
-                                    <span class="info" id="total">00:00</span>
-                                </div>
-                                <div class="text-center botoes">
-                                    <button id="stop" onclick="stop()"><span><i class="fa fa-stop-circle fa-3x"  aria-hidden="true"> </i></span></button>
-                                    <button id="rew" onclick="skip(-10)"><span><i class="fa fa-fast-backward fa-3x"  aria-hidden="true"> </i></span></button>
-                                    <button id="play" onclick="play()"><span><i class="fa fa-play-circle fa-3x"  aria-hidden="true"> </i></span></button>
-                                    <button id="pause" onclick="pause()"><span><i class="fa fa-pause-circle fa-3x"  aria-hidden="true"> </i></span></button>
-                                    <button id="fastFwd" onclick="skip(10)"><span><i class="fa fa-fast-forward fa-3x"  aria-hidden="true"></i> </span></button>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="th2">Lista</p>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div id="lista">
-                                            <span id="conteudo-lista">
-                                                <ul class='playlists droppable'>
-                                                    <li class='playlist draggable'>BBKingeEricClaptonn.m4a</li>
-                                                    <li class='playlist draggable'>Cuck Berry.mp3</li>
-                                                    <li class='playlist draggable'>Gato.mp4</li>
-                                                    <li class='playlist draggable'>Ney Matogrosso - Poema.mp3</li>
-                                                    <li class='playlist draggable'>Ney Matogrosso - Sangue Latino.mp3</li>
-                                                </ul>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-8">
-                                    <p id="titulo"></p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div id="mediaplayer">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <span class="th1">Media Player</span>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div id="player">
+                <span id="msg-fundo">Arraste o arquivo ou duplo clique para executar.</span>
+              </div>
+              <div class="contagem">
+                <span id="restante">00:00</span> /
+                <span id="total">00:00</span>
+              </div>
+              <div class="botoes">
+                <button id="stop" onclick="stop()"><span><i class="fa fa-stop-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                <button id="rew" onclick="skip(-10)"><span><i class="fa fa-fast-backward fa-3x"  aria-hidden="true"> </i></span></button>
+                <button id="play" onclick="play()"><span><i class="fa fa-play-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                <button id="pause" onclick="pause()"><span><i class="fa fa-pause-circle fa-3x"  aria-hidden="true"> </i></span></button>
+                <button id="fastFwd" onclick="skip(10)"><span><i class="fa fa-fast-forward fa-3x"  aria-hidden="true"></i> </span></button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="lista-radius">
+                <div class="row">
+                  <div class="col-md-12">
+                    <p class="th2">Lista</p>
+                  </div>
+                  <div class="col-md-12">
+                    <div id="lista">
+                      <span id="conteudo-lista">
+                        <ul class='playlists droppable'>
+                          <li class='playlist draggable'>BBKingeEricClaptonn.m4a</li>
+                          <li class='playlist draggable'>Cuck Berry.mp3</li>
+                          <li class='playlist draggable'>Gato.mp4</li>
+                          <li class='playlist draggable'>Ney Matogrosso - Sangue Latino.mp3</li>
+                        </ul>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-8">
+                <p id="titulo"></p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://use.fontawesome.com/588f3d4442.js"></script>
-
-        <script type="text/javascript">
-        var deselecionarItensLista = function() {
-            $('ul li').each(function(index) {
-                $(this).removeClass("selecionado");
-            });
-        };
-
-        $('.draggable, .droppable').sortable({
-            connectWith: '.playlists'
-        });
-
-        $("#player").droppable({
-            drop: function(ui, event) {
-                $("#player").html("<video id='video' src='media/" + $(event.draggable).html() + "' poster='media/fundo.png'autoplay></video>");
-                $("#titulo").html("Executando - " + $(event.draggable).html());
-                video.onprogress = startOnProgress();
-            }
-        });
-
-        $('ul li').on('click', function() {
-            deselecionarItensLista();
-            $(this).addClass("selecionado");
-        });
-
-        $(document).ready(function() {
-            $("li").dblclick(function() {
-                $("#player").html("<video id='video'src='media/" +
-                $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='media/fundo.png' width='100%' autoplay></video>");
-                $("#titulo").html("Executando - " + $(this).html());
-                video.onprogress = startOnProgress();
-            });
-        });
-
-        function play() {
-            var video = document.getElementById("video");
-            var button = document.getElementById("play");
-            video.play();
-        }
-
-        function pause() {
-            var video = document.getElementById("video");
-            var button = document.getElementById("pause");
-            video.pause();
-        }
-
-        function stop() {
-            var video = document.getElementById("video");
-            video.currentTime = 0;
-            video.pause();
-
-        }
-
-        function skip(value) {
-            var video = document.getElementById("video");
-            video.currentTime += value;
-        }
-
-        function startOnProgress() {
-            video.addEventListener('canplay', play_evento, false);
-            video.addEventListener('play', play_evento, false);
-            video.addEventListener('timeupdate', atualizar, false);
-
-        };
-
-        function atualizar() {
-            document.getElementById('restante').innerHTML = secToStr(video.currentTime);
-        }
-
-        function play_evento() {
-            document.getElementById('restante').innerHTML = secToStr(video.currentTime);
-            document.getElementById('total').innerHTML = secToStr(video.duration);
-        }
-
-        function secToStr(sec_num) {
-            sec_num = Math.floor(sec_num);
-            var horas = Math.floor(sec_num / 3600);
-            var minutos = Math.floor((sec_num - (horas * 3600)) / 60);
-            var segundos = sec_num - (horas * 3600) - (minutos * 60);
-
-            if (horas < 10) {
-                horas = '0' + horas;
-            }
-            if (minutos < 10) {
-                minutos = '0' + minutos;
-            }
-            if (segundos < 10) {
-                segundos = '0' + segundos;
-            }
-            var tempo = minutos + ':' + segundos;
-            return tempo;
-        }
-
-        </script>
+      </div>
     </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/588f3d4442.js"></script>
+
+  <script type="text/javascript">
+  var deselecionarItensLista = function() {
+    $('ul li').each(function(index) {
+      $(this).removeClass("selecionado");
+    });
+  };
+
+  $('.draggable, .droppable').sortable({
+    connectWith: '.playlists'
+  });
+
+  $("#player").droppable({
+    drop: function(ui, event) {
+      $("#player").html("<video id='video' src='" + $(event.draggable).html() + "' poster='fundo.png' autoplay></video>");
+      $("#titulo").html("Executando - " + $(event.draggable).html());
+      video.onprogress = startOnProgress();
+    }
+  });
+
+  $('ul li').on('click', function() {
+    deselecionarItensLista();
+    $(this).addClass("selecionado");
+  });
+
+  $(document).ready(function() {
+    $("li").dblclick(function() {
+      $("#player").html("<video id='video'src='" +
+      $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='fundo.png' autoplay></video>");
+      $("#titulo").html("Executando - " + $(this).html());
+      video.onprogress = startOnProgress();
+    });
+  });
+
+  function play() {
+    var video = document.getElementById("video");
+    var button = document.getElementById("play");
+    video.play();
+  }
+
+  function pause() {
+    var video = document.getElementById("video");
+    var button = document.getElementById("pause");
+    video.pause();
+  }
+
+  function stop() {
+    var video = document.getElementById("video");
+    video.currentTime = 0;
+    video.pause();
+  }
+
+  function skip(value) {
+    var video = document.getElementById("video");
+    video.currentTime += value;
+  }
+
+  function startOnProgress() {
+    video.addEventListener('canplay', play_evento, false);
+    video.addEventListener('play', play_evento, false);
+    video.addEventListener('timeupdate', atualizar, false);
+  };
+
+  function atualizar() {
+    document.getElementById('restante').innerHTML = contador(video.currentTime);
+  }
+
+  function play_evento() {
+    document.getElementById('restante').innerHTML = contador(video.currentTime);
+    document.getElementById('total').innerHTML = contador(video.duration);
+  }
+
+  function contador(sec_num) {
+    sec_num = Math.floor(sec_num);
+    var horas = Math.floor(sec_num / 3600);
+    var minutos = Math.floor((sec_num - (horas * 3600)) / 60);
+    var segundos = sec_num - (horas * 3600) - (minutos * 60);
+
+    if (horas < 10) {
+      horas = '0' + horas;
+    }
+    if (minutos < 10) {
+      minutos = '0' + minutos;
+    }
+    if (segundos < 10) {
+      segundos = '0' + segundos;
+    }
+    var tempo = minutos + ':' + segundos;
+    return tempo;
+  }
+
+  </script>
 </body>
 </html>
