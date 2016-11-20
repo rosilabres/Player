@@ -187,7 +187,7 @@
                         <ul class='playlists droppable'>
                           <li class='playlist draggable'>BBKingeEricClaptonn.m4a</li>
                           <li class='playlist draggable'>Cuck Berry.mp3</li>
-                          <li class='playlist draggable'>Gato.mp4</li>
+                          <li class='playlist draggable'>gato.mp4</li>
                           <li class='playlist draggable'>Ney Matogrosso - Sangue Latino.mp3</li>
                         </ul>
                       </span>
@@ -227,7 +227,7 @@
 
   $("#player").droppable({
     drop: function(ui, event) {
-      $("#player").html("<video id='video' src='" + $(event.draggable).html() + "' poster='fundo.png' autoplay></video>");
+      $("#player").html("<video id='video' src='https://raw.githubusercontent.com/rosilabres/Player/master/" + $(event.draggable).html() + "' poster='https://raw.githubusercontent.com/rosilabres/Player/master/fundo.png' autoplay></video>");
       $("#titulo").html("Executando - " + $(event.draggable).html());
       video.onprogress = startOnProgress();
     }
@@ -240,8 +240,8 @@
 
   $(document).ready(function() {
     $("li").dblclick(function() {
-      $("#player").html("<video id='video'src='" +
-      $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='fundo.png' autoplay></video>");
+      $("#player").html("<video id='video'src='https://raw.githubusercontent.com/rosilabres/Player/master/" +
+      $($(this)).html() + "?raw=true'" + $(this).html() + "' poster='https://raw.githubusercontent.com/rosilabres/Player/master/fundo.png' autoplay></video>");
       $("#titulo").html("Executando - " + $(this).html());
       video.onprogress = startOnProgress();
     });
